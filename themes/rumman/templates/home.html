@@ -1,0 +1,30 @@
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","layout":{"type":"constrained"}} -->
+<main class="wp-block-group alignfull"><!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"clamp(3rem,5vw,6rem)","bottom":"clamp(3rem,5vw,6rem)"}}},"layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull" style="padding-top:clamp(3rem,5vw,6rem);padding-bottom:clamp(3rem,5vw,6rem)"><!-- wp:heading {"level":1,"align":"wide"} -->
+<h1 class="wp-block-heading alignwide">Recipes</h1>
+<!-- /wp:heading -->
+<!-- wp:query {"queryId":2,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"align":"wide","className":"cook-grid recipe-grid","style":{"spacing":{"margin":{"top":"3.2rem"}}}} -->
+<div class="wp-block-query alignwide cook-grid recipe-grid" style="margin-top:3.2rem"><!-- wp:post-template {"style":{"spacing":{"blockGap":"3.5rem"}},"layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:post-featured-image {"isLink":true} /-->
+<!-- wp:post-terms {"term":"category","className":"overline","style":{"spacing":{"margin":{"top":"1.2rem"}}},"textColor":"red"} /-->
+<!-- wp:post-title {"level":3,"isLink":true,"style":{"spacing":{"margin":{"top":"0.4rem"}}}} /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"4rem"}}}} -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>Nothing here yet.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer"} /-->

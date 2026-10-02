@@ -1,0 +1,146 @@
+/*
+Theme Name: Rumman
+Description: Block theme for Rumman, a fictional recipe, restaurant and pantry brand.
+Version: 1.0.0
+Requires at least: 6.7
+Requires PHP: 8.1
+Text Domain: rumman
+*/
+
+/* Base */
+body { -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+a { text-decoration: none; }
+:where(a, button, input, summary):focus-visible { outline: 2px solid var(--wp--preset--color--red); outline-offset: 3px; }
+.wp-site-blocks > * + * { margin-block-start: 0; }
+main > * + * { margin-block-start: 0; }
+img { display: block; }
+
+.overline { font-size: var(--wp--preset--font-size--x-small); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+
+/* "Book a table →" style links with a hairline underline */
+.arrow-link a, a.arrow-link { display: inline-flex; align-items: center; gap: 1.1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--wp--preset--color--line); font-size: 1.375rem; font-weight: 300; }
+.arrow-link a::after, a.arrow-link::after { content: ""; width: 40px; height: 9px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 9'%3E%3Cpath d='M0 4.5h38M34 1l4 3.5L34 8' fill='none' stroke='black'/%3E%3C/svg%3E") no-repeat center / contain; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 9'%3E%3Cpath d='M0 4.5h38M34 1l4 3.5L34 8' fill='none' stroke='black'/%3E%3C/svg%3E") no-repeat center / contain; color: var(--wp--preset--color--red); }
+.on-dark .arrow-link a, .on-dark a.arrow-link { border-color: rgba(255,255,255,.4); }
+.on-dark .arrow-link a::after { color: #fff; }
+.ext::after { content: " \2197"; color: var(--wp--preset--color--red); font-size: .8em; margin-left: .9rem; }
+
+/* Promo bar + header */
+.promo { font-size: var(--wp--preset--font-size--x-small); letter-spacing: .08em; text-transform: uppercase; }
+.site-header { border-bottom: 1px solid var(--wp--preset--color--line); position: sticky; top: var(--wp-admin--admin-bar--height, 0px); z-index: 20; background: #fff; }
+/* The template-part wrapper is only header-tall, which traps sticky; remove its box so the header sticks to the page. */
+.wp-block-template-part:has(> .site-header) { display: contents; }
+.logo { margin: 0; font-size: clamp(1.6rem, 3vw, 3rem); font-weight: 200; letter-spacing: .5em; text-transform: uppercase; line-height: 1; }
+.logo a { color: var(--wp--preset--color--red); }
+.site-header .wp-block-navigation { font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; }
+.header-icons { display: flex; gap: 2.2rem; align-items: center; }
+.header-icons a { position: relative; display: block; color: var(--wp--preset--color--ink); }
+.header-icons svg { width: 26px; height: 26px; display: block; }
+
+/* Inset photo panels (hero, deli band) */
+.inset { margin: 0 clamp(8px, 1vw, 19px) !important; max-width: none !important; width: auto !important; }
+.hero.wp-block-cover { min-height: min(730px, 80vh) !important; align-items: flex-start; }
+.hero .wp-block-cover__inner-container { align-self: stretch; min-height: min(730px, 80vh); }
+.hero-text { text-align: right; padding-top: 3.5rem; }
+.hero-book { position: absolute; right: clamp(16px, 3vw, 56px); bottom: 0; margin: 0; }
+/* Hero slider (Swiper, autoplay in rumman.js): the block gap would push slides 2+ down. */
+.hero-slider .swiper-wrapper > *, .hero-slider > * { margin-block: 0; }
+/* Dots: the vendored swiper.min.css is core-only, so the pagination styles live here. */
+.hero-slider .swiper-pagination { position: absolute; z-index: 2; left: clamp(20px, 3.9vw, 75px); bottom: 1.6rem; display: flex; gap: .6rem; }
+.hero-slider .swiper-pagination-bullet { width: 9px; height: 9px; border-radius: 50%; background: #fff; opacity: .5; cursor: pointer; transition: opacity .3s; }
+.hero-slider .swiper-pagination-bullet-active { opacity: 1; }
+.hero-book .wp-block-button__link::after { content: " \2197"; font-size: .8em; margin-left: .6rem; }
+
+/* What to cook this week: staggered photo heights */
+.cook-grid .wp-block-post-template { align-items: start; column-gap: clamp(20px, 4vw, 75px) !important; }
+.cook-grid .wp-block-post-featured-image img { aspect-ratio: 3 / 4; }
+.cook-grid li:nth-child(3n+2) .wp-block-post-featured-image img { aspect-ratio: 1; }
+.cook-grid li:nth-child(3n) .wp-block-post-featured-image img { aspect-ratio: 4 / 5; }
+.cook-grid .wp-block-post-title, .recipe-grid .wp-block-post-title { font-size: 1.375rem; font-weight: 300; line-height: 1.35; color: var(--wp--preset--color--ink); }
+.cook-grid li:nth-child(3n) { margin-right: calc(-1 * clamp(20px, 3.9vw, 75px)); }
+
+/* Swiper rows (collections, pantry): bleed to the right edge; the padding is where the last slide stops. Gaps are set in rumman.js. */
+.h-scroll { max-width: none !important; margin-left: 0 !important; margin-right: calc(-1 * clamp(20px, 3.9vw, 75px)) !important; padding-right: clamp(20px, 3.9vw, 75px); }
+.h-scroll .swiper-slide { width: clamp(260px, 23.5vw, 452px); }
+.h-scroll.pantry .swiper-slide { width: clamp(240px, 19.7vw, 378px); }
+.collection img { aspect-ratio: 1; width: 100%; object-fit: cover; transition: opacity .3s; }
+.collection a:hover img { opacity: .9; }
+.collection p { font-size: 1.375rem; font-weight: 300; margin-top: 1.2rem; }
+.collection p::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--wp--preset--color--red); margin-right: 1rem; vertical-align: middle; }
+
+.ing { background: var(--wp--preset--color--red); color: #fff; aspect-ratio: 378 / 410; padding: 2rem 2.4rem; display: flex; flex-direction: column; gap: .8rem; overflow: hidden; position: relative; }
+.ing:hover { color: #fff; background: #a50d26; }
+.ing strong { font-size: 2rem; font-weight: 500; }
+.ing span { font-size: 1rem; font-weight: 300; max-width: 15rem; position: relative; z-index: 1; }
+.ing b { position: absolute; right: 1.6rem; bottom: -.12em; font-size: clamp(9rem, 13vw, 15rem); font-weight: 600; line-height: 1; letter-spacing: -.04em; color: rgba(255,255,255,.18); transition: color .3s; }
+.ing:hover b { color: rgba(255,255,255,.32); }
+
+/* Motion. Load: hero copy rises in. Scroll: children of sections, card grids and rows rise in, staggered (assets/js/rumman.js).
+   Hidden state only applies once JS has flagged <html>, so no-JS visitors still see everything. */
+@keyframes rm-rise { from { opacity: 0; transform: translateY(18px); } }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .hero .wp-block-cover__inner-container { animation: rm-rise .9s .15s cubic-bezier(.22, 1, .36, 1) both; }
+  .rm-js :is(main > .wp-block-group:not(.swiper), main .wp-block-columns, .cook-grid .wp-block-post-template, .h-scroll .swiper-wrapper, .inset:not(.hero) > .wp-block-cover__inner-container) > * {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1);
+    transition-delay: calc(var(--rm-i, 0) * .1s);
+  }
+  .rm-js :is(main > .wp-block-group:not(.swiper), main .wp-block-columns, .cook-grid .wp-block-post-template, .h-scroll .swiper-wrapper, .inset:not(.hero) > .wp-block-cover__inner-container).is-in > * { opacity: 1; transform: none; }
+}
+
+/* Newsletter */
+.newsletter-form { display: flex; background: #fff; border-bottom: 1px solid var(--wp--preset--color--line); max-width: 755px; }
+.newsletter-form input[type=email] { flex: 1; min-width: 0; border: 0; padding: 1.2rem; font: inherit; font-size: 1.375rem; font-weight: 300; background: transparent; }
+.newsletter-form button { border: 0; background: none; padding: 0 1.2rem; cursor: pointer; color: var(--wp--preset--color--red); font-size: 1.6rem; }
+.consent { display: flex; gap: 1.2rem; font-size: .95rem; margin-top: 2rem; }
+.consent input { width: 20px; height: 20px; accent-color: var(--wp--preset--color--red); flex: none; }
+.consent a { color: var(--wp--preset--color--red); }
+
+/* Newsletter photo fills its column */
+.newsletter-photo figure { height: 100%; margin: 0; }
+.newsletter-photo img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; }
+
+/* Restaurants page */
+.place { border-bottom: 1px solid var(--wp--preset--color--line); padding-block: 1.6rem; }
+.place h3 { font-size: 1.75rem; }
+
+/* Single recipe */
+.recipe-body h2 { font-size: var(--wp--preset--font-size--large); margin-top: 2.5rem; }
+.recipe-body ul li, .recipe-body ol li { margin-bottom: .5rem; }
+.recipe-body ul li::marker { color: var(--wp--preset--color--red); }
+
+/* Footer */
+.site-footer .wp-block-navigation { font-size: 1.375rem; font-weight: 300; }
+.footer-links a { display: block; font-size: 1.375rem; font-weight: 300; line-height: 1.85; }
+.socials { display: flex; gap: 2.4rem; }
+.socials svg { width: 32px; height: 32px; fill: var(--wp--preset--color--red); }
+.legal { display: flex; flex-wrap: wrap; gap: .6rem 2.6rem; font-size: 1.05rem; color: var(--wp--preset--color--muted); }
+
+/* Toast */
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--wp--preset--color--ink); color: #fff; padding: .8rem 1.4rem; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 50; }
+.toast.on { opacity: 1; }
+
+@media (max-width: 1100px) {
+	.header-icons { gap: 1.2rem; }
+	.header-icons .hide-sm { display: none; }
+}
+@media (max-width: 781px) {
+	.logo { letter-spacing: .35em; }
+	.hero-text { text-align: left; }
+	.cook-grid li:nth-child(3n) { margin-right: 0; }
+	.hero-book { position: static; margin-top: 2rem; }
+}
+@media (max-width: 781px) { .hero-text.wp-block-group { align-items: flex-start; } }
+
+/* Back to top: shown after scrolling (is-shown, set in rumman.js). */
+.to-top { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 30; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--wp--preset--color--red); color: #fff; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .3s, transform .3s, visibility .3s; }
+.to-top.is-shown { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { color: #fff; opacity: .85; }
+.to-top svg { width: 22px; height: 22px; }
+
+/* Footer brand icon (assets/images/icon.png, same art as the Site Icon). */
+.footer-icon { display: block; width: 64px; margin-bottom: 2rem; }
+.footer-icon img { display: block; width: 100%; height: auto; }
