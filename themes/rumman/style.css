@@ -62,7 +62,7 @@ img { display: block; }
 
 /* Swiper rows (collections, pantry): bleed to the right edge; the padding is where the last slide stops. Gaps are set in rumman.js. */
 .h-scroll { max-width: none !important; margin-left: 0 !important; margin-right: calc(-1 * clamp(20px, 3.9vw, 75px)) !important; padding-right: clamp(20px, 3.9vw, 75px); }
-.h-scroll .swiper-slide { width: clamp(260px, 23.5vw, 452px); }
+.h-scroll .swiper-slide { width: clamp(260px, 23.5vw, 452px); margin-block-start: 0; } /* flow layout's block gap would push slides 2+ down */
 .h-scroll.pantry .swiper-slide { width: clamp(240px, 19.7vw, 378px); }
 .collection img { aspect-ratio: 1; width: 100%; object-fit: cover; transition: opacity .3s; }
 .collection a:hover img { opacity: .9; }
